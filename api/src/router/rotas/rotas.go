@@ -13,11 +13,12 @@ type Rota struct {
 	RequerAutenticacao bool
 }
 
-func ConfigurarRotas(r mux.Router) *mux.Router {
+// ConfigurarRotas configura todas as rotas no router fornecido
+func ConfigurarRotas(r *mux.Router) *mux.Router {
 	rotas := rotasUsuarios
 
 	for _, rota := range rotas {
 		r.HandleFunc(rota.URI, rota.Funcao).Methods(rota.Metodo)
 	}
-	return &r
+	return r
 }
