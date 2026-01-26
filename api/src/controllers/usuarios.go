@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -43,6 +44,7 @@ func CriarUsuario(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	repositorio := repositorios.RepositorioDeUsuarios(db)
+	usuario.CriadoEm = time.Now()
 	usuario.ID, erro = repositorio.Criar(usuario)
 	if erro != nil {
 		respostas.Erro(w, http.StatusInternalServerError, erro)
